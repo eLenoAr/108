@@ -1,7 +1,13 @@
 module.exports = function( grunt ) {
 
 	require( 'matchdep' ).filterDev( 'grunt-*' ).forEach( grunt.loadNpmTasks );
-	require( './.deployment' );
+
+	// destination path for deployment
+	// overwrite in hidden .deployment file
+	dest = 'path/for/deployment';
+	try {
+		require( './.deployment' );
+	} catch( error ) {}
 
 	grunt.initConfig( {
 		pkg: grunt.file.readJSON( 'package.json' ),
@@ -38,9 +44,9 @@ module.exports = function( grunt ) {
 				],
 				'files' : {
 					'src': [
-						'src/js/**/*.js', 
-						'src/less/**/*.less', 
-						'!node_modules/**/*', 
+						'src/js/**/*.js',
+						'src/less/**/*.less',
+						'!node_modules/**/*',
 						'!src/js/**/*.min.js'
 					]
 				}
@@ -65,32 +71,41 @@ module.exports = function( grunt ) {
 						'src/js/timeline.js',
 						'src/js/ui.js',
 						'src/js/url.js',
-						'src/js/title.js'
+						'src/js/intro.js',
+						'src/js/title.js',
+						'src/js/history.js',
+						'src/js/recorder.js'
 					]
 				}
 			}
 		},
 
 		copy: {
-			production: {
+			deployment: {
 				files: [
 					{
-						expand: true, 
-						src: ['src/**/*', 'dist/**/*', 'index.html', '!.*'], 
+						expand: true,
+						src: ['src/**/*', 'dist/**/*', 'index.html', '!.*'],
 						dest: dest + '/'
 					},
 		    	],
 		  	},
-		},		
+		},
 
 		watch: {
 			css: {
 				files: ['**/*.less'],
-				tasks: ['buildcss']
+				tasks: ['buildcss'],
+                options: {
+                    livereload: true
+                }
 			},
 			js: {
 				files: ['src/js/**/*.js','!js/**/*.min.js'],
-				tasks: ['buildjs']
+				tasks: ['buildjs'],
+                options: {
+                    livereload: true
+                }
 			}
 		}
 

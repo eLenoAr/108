@@ -14,23 +14,27 @@
 
 	opacity: 0.5;
 
-	transition: all 300ms ease;	
+	transition: all 300ms ease;
 
 	&:hover {
 		.animation--blink;
-	}	
+	}
 
 	.visible--ui-controls & {
 		transform: translateY( -6rem );
 	}
 }
 
-// modal 
+// modal
 .ui-modal--share {
 
 	.visible--ui-share & {
 		.ui-modal.visible;
 	}
+}
+
+.ui-modal--share .ui-modal-content {
+	width: 32rem;
 }
 
 .share-url {
@@ -53,6 +57,7 @@
 		display: block;
 		width: 2rem;
 		margin-right: 4rem;
+		margin-bottom: 1px;
 
 		background: linear-gradient( 90deg, fade( @color--bg, 0% ) 0%, fade( @color--bg, 100% ) 90% );
 	}
@@ -63,13 +68,13 @@
 		animation: none !important;
 	}
 }
- 
+
 .share-url-input {
 	appearance: none;
 	box-sizing: border-box;
 	display: block;
 	width: 100%;
-	
+
 	padding: 0.35rem 0 0.5rem 0.35rem;
 
 	font-family: inherit;
@@ -81,7 +86,7 @@
 	border: none;
 
   	outline: none;
-	box-shadow: none !important; 
+	box-shadow: none !important;
 }
 
 .share-url-button {
@@ -92,6 +97,8 @@
 	top: 0;
 
 	width: 4rem;
+	padding-top: 0.45em;
+	padding-bottom: 0.35em;
 
 	text-align: center;
 
@@ -107,10 +114,25 @@
 		&:hover,
 		&:focus {
 
-		}	
+		}
 
 		.visible--ui-controls & {
 			transform: translateY( -11rem );
+		}
+	}
+}
+
+
+@media screen and ( max-height: 480px ) {
+	.ui-toggle--share {
+
+		&:hover,
+		&:focus {
+
+		}
+
+		.visible--ui-controls & {
+			transform: translateY( -9rem );
 		}
 	}
 }
